@@ -28,10 +28,14 @@ class AudioService {
   }
 
   // Play background music
-  void playBgm(String filename) {
+  void playBgm(String filename) async {
     if (!_initialized) return;
-    final path = filename.startsWith('music/') ? filename : 'music/$filename';
-    FlameAudio.bgm.play(path, volume: _musicVolume);
+    try {
+      final path = filename.startsWith('music/') ? filename : 'music/$filename';
+      await FlameAudio.bgm.play(path, volume: _musicVolume);
+    } catch (e) {
+      // Fail silently to prevent platform audio errors from interrupting play loop
+    }
   }
 
   void stopBgm() {
@@ -50,9 +54,13 @@ class AudioService {
   }
 
   // Play sound effect
-  void playSfx(String filename) {
+  void playSfx(String filename) async {
     if (!_initialized) return;
-    final path = filename.startsWith('sfx/') ? filename : 'sfx/$filename';
-    FlameAudio.play(path, volume: _sfxVolume);
+    try {
+      final path = filename.startsWith('sfx/') ? filename : 'sfx/$filename';
+      await FlameAudio.play(path, volume: _sfxVolume);
+    } catch (e) {
+      // Fail silently to prevent platform audio errors from interrupting play loop
+    }
   }
 }

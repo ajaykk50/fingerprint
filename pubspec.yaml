@@ -41,17 +41,20 @@ dependencies:
   equatable: ^2.0.5
   go_router: ^14.2.0
   path_provider: ^2.1.3
+  google_mobile_ads: ^5.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_native_splash: ^2.4.0
+
+flutter_native_splash:
+  color: "#0a0c10" # Matches AppTheme.background deep dark color
+  fullscreen: true
+  android_12:
+    color: "#0a0c10"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

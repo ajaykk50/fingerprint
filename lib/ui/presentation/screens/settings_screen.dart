@@ -4,6 +4,7 @@ import '../../../core/config/dependency_injection.dart';
 import '../../../core/config/theme.dart';
 import '../../../core/repository/game_repository.dart';
 import '../../../core/services/audio_service.dart';
+import '../widgets/ad_banner_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -124,7 +125,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: const Text('WIPE DATA', style: TextStyle(fontFamily: 'Courier New', letterSpacing: 2)),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 24),
+            const SafeArea(
+              top: false,
+              child: AdBannerWidget(),
+            ),
           ],
         ),
       ),

@@ -50,37 +50,27 @@ class LevelConfig {
 
 class LevelConfigManager {
   static LevelConfig getLevelConfig(int levelId) {
-    // Determine World classification (1 to 10)
+    // Determine World classification (1 to 5) across 20 levels
     int world = 1;
-    if (levelId <= 20) {
+    if (levelId <= 4) {
       world = 1;
-    } else if (levelId <= 45) {
+    } else if (levelId <= 8) {
       world = 2;
-    } else if (levelId <= 70) {
+    } else if (levelId <= 12) {
       world = 3;
-    } else if (levelId <= 100) {
+    } else if (levelId <= 16) {
       world = 4;
-    } else if (levelId <= 130) {
-      world = 5;
-    } else if (levelId <= 160) {
-      world = 6;
-    } else if (levelId <= 190) {
-      world = 7;
-    } else if (levelId <= 220) {
-      world = 8;
-    } else if (levelId <= 265) {
-      world = 9;
     } else {
-      world = 10;
+      world = 5;
     }
 
     // Use deterministic random based on levelId
     final rand = Random(levelId * 237);
 
     // Cap maze sizing to fit nicely on the screen and reduce complexity
-    final int baseSize = 8 + (world ~/ 2);
-    final int cols = baseSize.clamp(8, 13);
-    final int rows = baseSize.clamp(8, 13);
+    final int baseSize = 8 + (world - 1);
+    final int cols = baseSize.clamp(8, 12);
+    final int rows = baseSize.clamp(8, 12);
 
     // Fingerprint type selection per world
     FingerprintType fType = FingerprintType.whorl;
@@ -90,12 +80,8 @@ class LevelConfigManager {
       fType = FingerprintType.arch;
     } else if (world == 4) {
       fType = FingerprintType.loop;
-    } else if (world == 5 || world == 6) {
+    } else if (world == 5) {
       fType = FingerprintType.doubleLoop;
-    } else {
-      // Alternate other shapes
-      final index = rand.nextInt(FingerprintType.values.length);
-      fType = FingerprintType.values[index];
     }
 
     final startPoint = const Point(0, 0); // Always start at top-left edge corridor

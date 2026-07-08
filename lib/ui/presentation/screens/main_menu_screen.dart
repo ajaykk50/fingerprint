@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/config/theme.dart';
+import '../widgets/ad_banner_widget.dart';
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -12,28 +13,38 @@ class MainMenuScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           color: AppTheme.background,
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'ECHOPRINT',
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'ESCAPE THE FINGERPRINT',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppTheme.textSecondary,
-                      letterSpacing: 4.0,
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'ECHOPRINT',
+                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'ESCAPE THE FINGERPRINT',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: AppTheme.textSecondary,
+                            letterSpacing: 4.0,
+                          ),
+                    ),
+                    const SizedBox(height: 60),
+                    _buildMenuButton(context, 'ENTER SCANNER', () => context.push('/levels')),
+                    const SizedBox(height: 20),
+                    _buildMenuButton(context, 'SETTINGS', () => context.push('/settings')),
+                  ],
+                ),
               ),
-              const SizedBox(height: 60),
-              _buildMenuButton(context, 'ENTER SCANNER', () => context.push('/levels')),
-              const SizedBox(height: 20),
-              _buildMenuButton(context, 'SETTINGS', () => context.push('/settings')),
-            ],
-          ),
+            ),
+            const SafeArea(
+              top: false,
+              child: AdBannerWidget(),
+            ),
+          ],
         ),
       ),
     );

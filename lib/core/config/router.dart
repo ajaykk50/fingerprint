@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import '../../ui/presentation/screens/splash_screen.dart';
 import '../../ui/presentation/screens/main_menu_screen.dart';
 import '../../ui/presentation/screens/level_select_screen.dart';
 import '../../ui/presentation/screens/game_play_screen.dart';
@@ -9,6 +10,10 @@ final GoRouter appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: '/menu',
       builder: (context, state) => const MainMenuScreen(),
     ),
     GoRoute(

@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import '../services/storage_service.dart';
 import '../services/audio_service.dart';
+import '../services/ad_service.dart';
 import '../repository/game_repository.dart';
 
 final GetIt locator = GetIt.instance;
@@ -20,4 +21,9 @@ Future<void> setupDependencyInjection() async {
   final audioService = AudioService();
   await audioService.init();
   locator.registerSingleton<AudioService>(audioService);
+
+  // Ad Service
+  final adService = AdService();
+  await adService.init();
+  locator.registerSingleton<AdService>(adService);
 }

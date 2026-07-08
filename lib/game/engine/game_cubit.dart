@@ -107,7 +107,7 @@ class GameCubit extends Cubit<GameState> {
 
   void startGame() {
     emit(state.copyWith(status: GameStatus.playing));
-    _audioService.playBgm('ambient_explore.mp3');
+    _audioService.playBgm('ambient_explore.wav');
   }
 
   void pauseGame() {

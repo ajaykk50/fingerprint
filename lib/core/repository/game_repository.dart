@@ -11,6 +11,15 @@ class GameRepository {
   Future<void> init() async {
     _progress = _storageService.loadProgress();
     _settings = _storageService.loadSettings();
+
+    // Database migration for the 20-level layout version
+    final bool migrated = _progress['migratedTo20Levels'] as bool? ?? false;
+    if (!migrated) {
+      _progress['unlockedLevel'] = 1;
+      _progress['completedLevels'] = <String, dynamic>{};
+      _progress['migratedTo20Levels'] = true;
+      await _storageService.saveProgress(_progress);
+    }
   }
 
   // Getters
@@ -51,7 +60,7 @@ class GameRepository {
 
     // Unlock next level if applicable
     final currentUnlocked = unlockedLevel;
-    if (levelId == currentUnlocked && levelId < 285) {
+    if (levelId == currentUnlocked && levelId < 20) {
       _progress['unlockedLevel'] = levelId + 1;
     }
 

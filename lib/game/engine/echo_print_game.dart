@@ -109,8 +109,10 @@ class EchoPrintGame extends FlameGame with HasCollisionDetection {
     if (gameCubit.state.status == GameStatus.playing) {
       gameCubit.incrementTime(dt);
       
-      // Flashlight battery drains continuously (e.g., 2% per second basic rate)
-      gameCubit.drainBattery(2.0 * dt);
+      // Flashlight battery drains progressively faster on higher levels
+      final int levelId = gameCubit.state.levelId;
+      final double drainRate = 1.0 + (levelId - 1) * 0.25;
+      gameCubit.drainBattery(drainRate * dt);
     }
   }
 
